@@ -54,18 +54,30 @@ import java.io.InputStreamReader;
     }
 %}
 
-Newline    = \r | \n | \r\n
-Whitespace = [ \t\f] | {Newline}
-Number     = [0-9]+
+Newline     = \r | \n | \r\n
+Whitespace  = [ \t\f] | {Newline}
+Digit       = [0-9]
+Number      = [1-9][0-9]*
+Punctuation = [!\"#\$%&\'()\*\+\,\-\.\/:;<=>\?@\[\]\\\^_`{}\~]
+Character   = {Punctuation} | {Digit} | [A-Za-z]
+String      = {Character}+
+
+/* literals */
+
+boolean     = true|false
+integer     = {Number}
+
 
 /* comments */
-Comment = {TraditionalComment} | {EndOfLineComment}
-TraditionalComment = "/*" {CommentContent} \*+ "/"
-EndOfLineComment = "//" [^\r\n]* {Newline}
-CommentContent = ( [^*] | \*+[^*/] )*
+Comment = {HastagComment} | {EndOfLineComment}
+HastagComment       = "#" [^\r\n]* {Newline}
+EndOfLineComment    = "//" [^\r\n]* {Newline}
 
 ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
 
+IdentifierStartCharacter = {Letter}|_
+IdentifierCharacter      = {Letter}|{Digit}|_
+Identifier               = {IdentifierStartCharacter}{IdentifierCharacter}*
 
 %eofval{
     return symbolFactory.newSymbol("EOF",sym.EOF);
@@ -74,18 +86,66 @@ ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
 %state CODESEG
 
 %%  
+/* int bool void true false if else while return cin cout */
 
+/* keywords */
+<YYINITIAL> "int"      {return symbolFactory.newSymbol("INTEGER", INTEGER); }
+<YYINITIAL> "bool"     {return symbolFactory.newSymbol("BOOL",BOOL); }
+<YYINITIAL> "void"     {return symbolFactory.newSymbol("VOID", VOID); }
+<YYINITIAL> "true"     {return symbolFactory.newSymbol("TRUE", TRUE); }
+<YYINITIAL> "false"    {return symbolFactory.newSymbol("FALSE", FALSE); }
+<YYINITIAL> "if"	   {return symbolFactory.newSymbol("IF", IF); }
+<YYINITIAL> "else"	   {return symbolFactory.newSymbol("ELSE",ELSE); }
+<YYINITIAL> "while"    {return symbolFactory.newSymbol("WHILE", WHILE); }
+<YYINITIAL> "return"   {return symbolFactory.newSymbol("RETURN", RETURN); }
+<YYINITIAL> "cin"      {return symbolFactory.newSymbol("CIN", CIN); }
+<YYINITIAL> "cout"	   {return symbolFactory.newSymbol("COUT", COUT); }
 <YYINITIAL> {
-	/* aici ar trebui sa vina val reservate */
-  {Whitespace} {                              }
-  ";"          { return symbolFactory.newSymbol("SEMI", SEMI); }
-  "+"          { return symbolFactory.newSymbol("PLUS", PLUS); }
-  "-"          { return symbolFactory.newSymbol("MINUS", MINUS); }
-  "*"          { return symbolFactory.newSymbol("TIMES", TIMES); }
-  "n"          { return symbolFactory.newSymbol("UMINUS", UMINUS); }
-  "("          { return symbolFactory.newSymbol("LPAREN", LPAREN); }
-  ")"          { return symbolFactory.newSymbol("RPAREN", RPAREN); }
-  {Number}     { return symbolFactory.newSymbol("NUMBER", NUMBER, Integer.parseInt(yytext())); }
+  
+{Whitespace} {                              }
+"="		   { return symbolFactory.newSymbol("EQ", EQ); }
+
+/* Arithmetic */
+"+"          { return symbolFactory.newSymbol("PLUS", PLUS); }
+"-"          { return symbolFactory.newSymbol("MINUS", MINUS); }
+"*"          { return symbolFactory.newSymbol("TIMES", TIMES); }
+"/"		     { return symbolFactory.newSymbol("DIVISION", DIVISION); }
+
+/* Shift Operators */
+"<<"        { return symbolFactory.newSymbol("LEFTSHIFT", LEFTSHIFT); }
+">>"        { return symbolFactory.newSymbol("RIGHTSHIFT", RIGHTSHIFT); } 
+
+
+/* Relational Operators */
+"<"          { return symbolFactory.newSymbol("LESS", LESS); }
+">"          { return symbolFactory.newSymbol("GREATER", GREATER); } 
+"<=" 		 { return symbolFactory.newSymbol("LESSEQ", LESSEQ); }        /* Less than or equal to */
+">="         { return symbolFactory.newSymbol("GREATEREQ", GREATEREQ); }  /* Greater than or equal to */
+"==" 		 { return symbolFactory.newSymbol("EQEQ", EQEQ); }            /* Equal Equal */
+"!="         { return symbolFactory.newSymbol("NOTEQ", NOTEQ); }          /* Not Equal */
+
+/* Logical Operators */
+"||"         { return symbolFactory.newSymbol("OR", OR); }
+"&&"         { return symbolFactory.newSymbol("AND", AND); }
+"!"          { return symbolFactory.newSymbol("NOT", NOT); }
+
+/* Separators */
+"{"		   { return symbolFactory.newSymbol("LEFTCURLY", LEFTCURLY); }
+"}"		   { return symbolFactory.newSymbol("RIGHTCURLY", RIGHTCURLY); }
+"("		   { return symbolFactory.newSymbol("LEFT", LEFT); }
+")"		   { return symbolFactory.newSymbol("RIGHT", RIGHT); }
+"["		   { return symbolFactory.newSymbol("LEFTSQ", LEFTSQ); }
+"]"		   { return symbolFactory.newSymbol("RIGHTSQ", RIGHTSQ); }
+","		   { return symbolFactory.newSymbol("COMMA", COMMA); }
+";"        { return symbolFactory.newSymbol("SEMI", SEMI); }	
+
+{Comment}    { 							  }
+  
+/* Literals */
+{integer}         { return symbolFactory.newSymbol("INTEGER", INTEGER); }
+{boolean}         { return symbolFactory.newSymbol("BOOLEAN", BOOLEAN); }
+\"{String}*\"     { return symbolFactory.newSymbol("STRING", STRING); }
+{Identifier}      { return symbolFactory.newSymbol("IDENTIFIER", IDENTIFIER); }
 }
 
 
