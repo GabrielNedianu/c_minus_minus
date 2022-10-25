@@ -32,7 +32,8 @@ scan with {: return lexer.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
 terminal            SEMI, PLUS, MINUS, UMINUS, TIMES, LPAREN, RPAREN;
-terminal Integer    NUMBER;        // our scanner provides numbers as integers
+terminal Integer    INTEGER_VALUE;        // our scanner provides numbers as integers
+terminal Boolean 	BOOLEAN_VALUE;		  // boolean values
 
 /* Non terminals */
 non terminal            expr_list;
@@ -54,6 +55,6 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;        :}
              | MINUS expr:e                 {: RESULT = -e;           :}
              %prec UMINUS
              | LPAREN expr:e RPAREN	         {: RESULT = e;           :}
-             | NUMBER:n	                     {: RESULT = n;           :}
+             | INTEGER_VALUE:n	             {: RESULT = n;           :}
              ;
        

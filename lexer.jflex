@@ -73,7 +73,7 @@ Comment = {HastagComment} | {EndOfLineComment}
 HastagComment       = "#" [^\r\n]* {Newline}
 EndOfLineComment    = "//" [^\r\n]* {Newline}
 
-ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
+//ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
 
 IdentifierStartCharacter = {Letter}|_
 IdentifierCharacter      = {Letter}|{Digit}|_
@@ -142,12 +142,11 @@ Identifier               = {IdentifierStartCharacter}{IdentifierCharacter}*
 {Comment}    { 							  }
   
 /* Literals */
-{integer}         { return symbolFactory.newSymbol("INTEGER", INTEGER); }
-{boolean}         { return symbolFactory.newSymbol("BOOLEAN", BOOLEAN); }
-\"{String}*\"     { return symbolFactory.newSymbol("STRING", STRING); }
+{integer}         { return symbolFactory.newSymbol("INTEGER_VALUE", INTEGER_VALUE, Integer.parseInt(yytext())); }
+{boolean}         { return symbolFactory.newSymbol("BOOLEAN_VALUE", BOOLEAN_VALUE, Boolean.parseBoolean(yytext())); }
+\"{String}*\"     { return symbolFactory.newSymbol("STRING", STRING, yytext()); }
 {Identifier}      { return symbolFactory.newSymbol("IDENTIFIER", IDENTIFIER); }
 }
-
 
 
 // error fallback
