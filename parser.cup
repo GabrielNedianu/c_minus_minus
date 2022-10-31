@@ -31,7 +31,11 @@ init with {:
 scan with {: return lexer.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal            SEMI, PLUS, MINUS, UMINUS, TIMES, LPAREN, RPAREN;
+terminal 			INTEGER,BOOL,VOID,TRUE,FALSE,IF,ELSE,WHILE,RETURN,CIN,COUT;
+terminal			QUATATIONMARK,EQ,PLUS,MINUS,TIMES,DIVISION,LEFTSHIFT,RIGHTSHIFT,LESS,GREATER,LESSEQ,GREATEREQ,EQEQ,NOTEQ;
+terminal			OR,AND,NOT,LEFTCURLY,RIGHTCURLY,LEFT,RIGHT,LEFTSQ,RIGHTSQ,COMMA,SEMI;
+terminal String 	IDENTIFIER;			  // identifer
+terminal String		STRING;				  // string for our scanner
 terminal Integer    INTEGER_VALUE;        // our scanner provides numbers as integers
 terminal Boolean 	BOOLEAN_VALUE;		  // boolean values
 
@@ -42,7 +46,6 @@ non terminal Integer    expr;      // used to store evaluated subexpressions
 /* Precedences */
 precedence left PLUS, MINUS;
 precedence left TIMES;
-precedence left UMINUS;
 
 /* The grammar rules */
 expr_list ::= expr_list expr:e SEMI         {: System.out.println(e); :}
@@ -53,8 +56,4 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;        :}
              | expr:e1 MINUS expr:e2        {: RESULT = e1-e2;        :}
              | expr:e1 TIMES expr:e2        {: RESULT = e1*e2;        :}
              | MINUS expr:e                 {: RESULT = -e;           :}
-             %prec UMINUS
-             | LPAREN expr:e RPAREN	         {: RESULT = e;           :}
-             | INTEGER_VALUE:n	             {: RESULT = n;           :}
              ;
-       
