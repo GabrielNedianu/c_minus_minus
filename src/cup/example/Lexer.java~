@@ -618,11 +618,11 @@ public class Lexer implements sym, java_cup.runtime.Scanner {
         case 56: 
           {  return symbolFactory.newSymbol("OR", OR);  }
         case 82: break;
+        case 18: 
+          {  return symbolFactory.newSymbol("QUATATIONMARK", QUATATIONMARK) }
+        case 83: break;
         case 5: 
           {  return symbolFactory.newSymbol("INTEGER_VALUE", INTEGER_VALUE, Integer.parseInt(yytext()));  }
-        case 83: break;
-        case 18: 
-          {  return symbolFactory.newSymbol("QUATATIONMARK", QUATATIONMARK);  }
         case 84: break;
         case 3: 
         case 4: 

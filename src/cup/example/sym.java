@@ -8,27 +8,91 @@ package cup.example;
 /** CUP generated interface containing symbol constants. */
 public interface sym {
   /* terminals */
-  public static final int MINUS = 4;
-  public static final int UMINUS = 5;
-  public static final int NUMBER = 9;
-  public static final int SEMI = 2;
+  public static final int INTEGER = 2;
+  public static final int SEMI = 37;
+  public static final int GREATER = 22;
+  public static final int LESS = 21;
+  public static final int MINUS = 16;
+  public static final int NOT = 29;
+  public static final int AND = 28;
+  public static final int RIGHTSQ = 35;
+  public static final int OR = 27;
+  public static final int COMMA = 36;
+  public static final int BOOL = 3;
+  public static final int LEFTSQ = 34;
+  public static final int PLUS = 15;
+  public static final int LESSEQ = 23;
+  public static final int IF = 7;
+  public static final int LEFT = 32;
   public static final int EOF = 0;
-  public static final int PLUS = 3;
+  public static final int RETURN = 10;
+  public static final int TRUE = 5;
+  public static final int RIGHTCURLY = 31;
   public static final int error = 1;
-  public static final int RPAREN = 8;
-  public static final int TIMES = 6;
-  public static final int LPAREN = 7;
+  public static final int EQEQ = 25;
+  public static final int CIN = 11;
+  public static final int VOID = 4;
+  public static final int EQ = 14;
+  public static final int LEFTCURLY = 30;
+  public static final int TIMES = 17;
+  public static final int BOOLEAN_VALUE = 41;
+  public static final int ELSE = 8;
+  public static final int COUT = 12;
+  public static final int WHILE = 9;
+  public static final int QUATATIONMARK = 13;
+  public static final int STRING = 39;
+  public static final int GREATEREQ = 24;
+  public static final int RIGHTSHIFT = 20;
+  public static final int FALSE = 6;
+  public static final int RIGHT = 33;
+  public static final int DIVISION = 18;
+  public static final int INTEGER_VALUE = 40;
+  public static final int LEFTSHIFT = 19;
+  public static final int NOTEQ = 26;
+  public static final int IDENTIFIER = 38;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "SEMI",
+  "INTEGER",
+  "BOOL",
+  "VOID",
+  "TRUE",
+  "FALSE",
+  "IF",
+  "ELSE",
+  "WHILE",
+  "RETURN",
+  "CIN",
+  "COUT",
+  "QUATATIONMARK",
+  "EQ",
   "PLUS",
   "MINUS",
-  "UMINUS",
   "TIMES",
-  "LPAREN",
-  "RPAREN",
-  "NUMBER"
+  "DIVISION",
+  "LEFTSHIFT",
+  "RIGHTSHIFT",
+  "LESS",
+  "GREATER",
+  "LESSEQ",
+  "GREATEREQ",
+  "EQEQ",
+  "NOTEQ",
+  "OR",
+  "AND",
+  "NOT",
+  "LEFTCURLY",
+  "RIGHTCURLY",
+  "LEFT",
+  "RIGHT",
+  "LEFTSQ",
+  "RIGHTSQ",
+  "COMMA",
+  "SEMI",
+  "IDENTIFIER",
+  "STRING",
+  "INTEGER_VALUE",
+  "BOOLEAN_VALUE"
   };
 }
 
