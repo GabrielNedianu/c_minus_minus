@@ -61,6 +61,7 @@ Number      = [1-9][0-9]*
 Punctuation = [!\"#\$%&\'()\*\+\,\-\.\/:;<=>\?@\[\]\\\^_`{}\~]
 Character   = {Punctuation} | {Digit} | [A-Za-z]
 String      = {Character}+
+Letter      = [a-zA-Z]
 
 /* literals */
 
@@ -102,6 +103,8 @@ Identifier               = {IdentifierStartCharacter}{IdentifierCharacter}*
 <YYINITIAL> "cout"	   {return symbolFactory.newSymbol("COUT", COUT); }
 <YYINITIAL> {
   
+"\""        { return symbolFactory.newSymbol("QUATATIONMARK", QUATATIONMARK); }
+
 {Whitespace} {                              }
 "="		   { return symbolFactory.newSymbol("EQ", EQ); }
 
@@ -145,7 +148,7 @@ Identifier               = {IdentifierStartCharacter}{IdentifierCharacter}*
 {integer}         { return symbolFactory.newSymbol("INTEGER_VALUE", INTEGER_VALUE, Integer.parseInt(yytext())); }
 {boolean}         { return symbolFactory.newSymbol("BOOLEAN_VALUE", BOOLEAN_VALUE, Boolean.parseBoolean(yytext())); }
 \"{String}*\"     { return symbolFactory.newSymbol("STRING", STRING, yytext()); }
-{Identifier}      { return symbolFactory.newSymbol("IDENTIFIER", IDENTIFIER); }
+{Identifier}      { return symbolFactory.newSymbol("IDENTIFIER", IDENTIFIER, yytext()); }
 }
 
 
