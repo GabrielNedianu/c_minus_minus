@@ -38,39 +38,12 @@ terminal String 	IDENTIFIER;			  // identifer
 terminal String		STRING;				  // string for our scanner
 terminal Integer    INTEGER_VALUE;        // our scanner provides numbers as integers
 terminal Boolean 	BOOLEAN_VALUE;		  // boolean values
-terminal END_OF_INSTRUCTION;
 
 /* Non terminals */
-non terminal program;
-non terminal declaration_list;
-non terminal declaration;
-non terminal var_declaration;
-non terminal fun_declaration;
-non terminal type_specifier;
-non terminal params;
-non terminal compound_stmt;
-non terminal param_list;
-non terminal local_declarations;
-non terminal statement_list;
-non terminal statement;
-non terminal expression_stmt;
-non terminal selection_stmt;
-non terminal iteration_stmt;
-non terminal return_stmt;
-non terminal expression;
-non terminal simple_expression;
-non terminal additive_expression;
-non terminal addop;
-non terminal term;
-non terminal relop;
-non terminal mulop;
-non terminal factor;
-non terminal args;
-non terminal var;
-non terminal call;
-non terminal arg_list;
-non terminal param;
-non terminal simple_if;
+
+
+non terminal program, varDecl, fnDecl, type, parameters, block, formalsList, formalDecl, declList, stmtList, stmt, exp;
+non terminal subscriptExpr, fnCallStmt, atom, fnCallExpr, actualList;
 
 /* Precedences */
 precedence left PLUS, MINUS;
@@ -78,141 +51,111 @@ precedence left TIMES, DIVISION;
 
 /* The grammar rules */
 program
-	::= declaration_list				{: System.out.println("program-> Declaration List \n"); :}
-	;
-declaration_list
-	::= declaration_list declaration  {:System.out.println( "declaration_list -> Declaration List Declaration \n");:} 
-	| declaration					{:System.out.println( "declaration_list -> declaration\n");:}
-	;
-
-declaration
-	::= var_declaration	{: :}
-	| fun_declaration	{: System.out.println( "declaration -> fun_declaration\n"); :}
-	;
-var_declaration
-	::= type_specifier IDENTIFIER END_OF_INSTRUCTION		{::}
-	| type_specifier IDENTIFIER LEFTSQ INTEGER_VALUE RIGHTSQ END_OF_INSTRUCTION	{::}
-	;
-
-type_specifier
-	::= INTEGER																{::}															
-	| VOID																{::}
-	;
-fun_declaration
-	::= type_specifier IDENTIFIER LEFT params RIGHT compound_stmt				{::}
-	;
-params
-	::= param_list											{:	System.out.println("PARAM LIST\n");	:}
-	| VOID;
-	
-param_list
-	::= 
-	| param_list COMMA param						{::}
-	| param											{: System.out.println("PARAMETER");:}
-	;
-param
-	::= type_specifier IDENTIFIER								{::}
-	| type_specifier IDENTIFIER LEFTSQ RIGHTSQ	{::}
+	::= program varDecl				{: System.out.println("program-> Declaration List \n"); :}
+	|	program fnDecl
+	|	/* empty */
 	;
 	
-
-compound_stmt
-	::= LEFTCURLY local_declarations statement_list RIGHTCURLY		{::}
+varDecl
+	::= type IDENTIFIER SEMI
+	| type IDENTIFIER LEFTSQ INTEGER_VALUE RIGHTSQ SEMI
 	;
 	
-local_declarations 
-	::= local_declarations var_declaration		{::}
-	|											
-	;
-statement_list
-	::= statement_list statement		{::}
-	|
-	;
+type
+	::= INTEGER	| BOOL | VOID;
 
-statement
-	::= expression_stmt	{::}
-	| compound_stmt		{::}
-	| selection_stmt	{::}
-	| iteration_stmt	{::}
-	| return_stmt		{::}
-	;
-
-expression_stmt
-	::= expression END_OF_INSTRUCTION		{::}
-	| END_OF_INSTRUCTION		{::}
-	;
-simple_if
-	::= IF LEFT expression RIGHT statement
+fnDecl
+	::= type IDENTIFIER parameters block
 	;
 	
-selection_stmt
-	::= simple_if					   	{::}
-	| selection_stmt ELSE statement 			{::}
+parameters
+	::= LEFT RIGHT
+	| LEFT formalsList RIGHT
+	;
+	
+formalsList
+	::= formalDecl
+	| formalsList COMMA formalDecl
+	;
+	
+formalDecl
+	::= type IDENTIFIER;
+	
+block
+	::= LEFTCURLY declList stmtList RIGHTCURLY	;
+	
+declList
+	::= declList varDecl
+	| /* empty */
+;
+
+stmtList
+	::= stmtList stmt
+	| /* empty */
+	;
+	
+stmt
+	::= CIN RIGHTSHIFT IDENTIFIER COMMA
+	| CIN RIGHTSHIFT IDENTIFIER LEFTSQ exp RIGHTSQ COMMA
+	| COUT LEFTSHIFT exp COMMA
+	| subscriptExpr EQ exp COMMA
+	| IDENTIFIER EQ exp COMMA
+	| IF LEFT exp RIGHT block
+	| IF LEFT exp RIGHT block ELSE block
+	| WHILE LEFT exp RIGHT block
+	| RETURN exp COMMA
+	| RETURN COMMA
+	| fnCallStmt COMMA
+	;	
+
+exp
+	::= exp PLUS exp
+	| exp MINUS exp
+	| exp TIMES exp
+	| exp DIVISION exp
+	| NOT exp
+	| exp AND exp
+	| exp OR exp
+	| exp EQEQ exp
+	| exp NOTEQ exp
+	| exp LESS exp
+	| exp GREATER exp
+	| exp LESSEQ exp
+	| exp GREATEREQ exp
+	| MINUS atom
+	| atom
+	;
+	
+atom
+	::= INTEGER_VALUE
+	| STRING
+	| TRUE
+	| FALSE
+	| LEFT exp RIGHT
+	| fnCallExpr
+	| subscriptExpr
+	| IDENTIFIER
+	;
+	
+	
+fnCallExpr
+	::= IDENTIFIER RIGHT LEFT
+	| IDENTIFIER RIGHT actualList LEFT
 	;
 
-iteration_stmt
-	::= WHILE LEFT expression RIGHT statement		{::}
+fnCallStmt
+	::= IDENTIFIER RIGHT LEFT
+	| IDENTIFIER RIGHT actualList LEFT
 	;
-return_stmt
-	::= RETURN END_OF_INSTRUCTION  {:	:}
-	| RETURN expression  END_OF_INSTRUCTION	{::}
-	;
-expression
-	::= var EQ expression  {::}
-	|  simple_expression	 {::}
-	;
-var		
-	::= IDENTIFIER				{::}
-	| IDENTIFIER LEFTSQ expression RIGHTSQ {::}
-	;
-simple_expression
-	::= additive_expression relop  additive_expression  {::}
-	| additive_expression {::}
+	
+actualList
+	::= exp
+	| actualList COMMA exp
 	;
 
-relop
-	::= LESSEQ	{::}
-	| LESS	{::}
-	| GREATEREQ	{::}
-	| GREATER	{::}		
-	| EQEQ {::}
-	| NOTEQ {::}
-	;
-additive_expression
-	::=additive_expression addop term  {::}
-	| term		{::}
-	;
-addop
-	::= PLUS	{::}
-	| MINUS {::}
-	;
-
-term 
-	::= term mulop factor {::}
-	| factor {::}
-	;
-mulop
-	::=	TIMES	{::}
-	|	DIVISION			{::}
-	;
-factor
-	::= LEFT expression RIGHT	{::}
-	| var	{::}
-	| call		{::}
-	| INTEGER_VALUE		{::}
-	;
-
-call
-	::= IDENTIFIER LEFT args RIGHT  {::}
-	;
-args
-	::=arg_list {::}
-	| 
-	;
-arg_list
-	::= arg_list COMMA expression		{::}
-	| expression		{::}
-	;
+subscriptExpr
+	::= IDENTIFIER LEFTSQ exp RIGHTSQ
+	;		
 
 
 /* The grammar rules */
