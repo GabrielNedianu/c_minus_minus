@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import java_cup.runtime.ComplexSymbolFactory;
+import java_cup.runtime.Symbol;
 
 class Driver {
 
@@ -21,8 +22,8 @@ class Driver {
 		} 
 		Lexer lexer = new Lexer(symbolFactory,fis);
 
-		int currentSymbolNr;
-		while ((currentSymbolNr=lexer.next_token().sym)!= sym.EOF )
+		Symbol currentSymbolNr;
+		while ((currentSymbolNr=lexer.next_token()).sym!= sym.EOF )
 		{
 			System.out.println(currentSymbolNr);
 		}
