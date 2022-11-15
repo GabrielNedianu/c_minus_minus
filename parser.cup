@@ -38,17 +38,185 @@ terminal String 	IDENTIFIER;			  // identifer
 terminal String		STRING;				  // string for our scanner
 terminal Integer    INTEGER_VALUE;        // our scanner provides numbers as integers
 terminal Boolean 	BOOLEAN_VALUE;		  // boolean values
+terminal END_OF_INSTRUCTION;
 
 /* Non terminals */
-non terminal            expr_list;
-non terminal Integer    expr;      // used to store evaluated subexpressions
+non terminal program;
+non terminal declaration_list;
+non terminal declaration;
+non terminal var_declaration;
+non terminal fun_declaration;
+non terminal type_specifier;
+non terminal params;
+non terminal compound_stmt;
+non terminal param_list;
+non terminal local_declarations;
+non terminal statement_list;
+non terminal statement;
+non terminal expression_stmt;
+non terminal selection_stmt;
+non terminal iteration_stmt;
+non terminal return_stmt;
+non terminal expression;
+non terminal simple_expression;
+non terminal additive_expression;
+non terminal addop;
+non terminal term;
+non terminal relop;
+non terminal mulop;
+non terminal factor;
+non terminal args;
+non terminal var;
+non terminal call;
+non terminal arg_list;
+non terminal param;
+non terminal simple_if;
 
 /* Precedences */
 precedence left PLUS, MINUS;
-precedence left TIMES;
+precedence left TIMES, DIVISION;
 
 /* The grammar rules */
-expr_list ::= expr_list expr:e SEMI         {: System.out.println(e); :}
+program
+	::= declaration_list				{: System.out.println("program-> Declaration List \n"); :}
+	;
+declaration_list
+	::= declaration_list declaration  {:System.out.println( "declaration_list -> Declaration List Declaration \n");:} 
+	| declaration					{:System.out.println( "declaration_list -> declaration\n");:}
+	;
+
+declaration
+	::= var_declaration	{: :}
+	| fun_declaration	{: System.out.println( "declaration -> fun_declaration\n"); :}
+	;
+var_declaration
+	::= type_specifier IDENTIFIER END_OF_INSTRUCTION		{::}
+	| type_specifier IDENTIFIER LEFTSQ INTEGER_VALUE RIGHTSQ END_OF_INSTRUCTION	{::}
+	;
+
+type_specifier
+	::= INTEGER																{::}															
+	| VOID																{::}
+	;
+fun_declaration
+	::= type_specifier IDENTIFIER LEFT params RIGHT compound_stmt				{::}
+	;
+params
+	::= param_list											{:	System.out.println("PARAM LIST\n");	:}
+	| VOID;
+	
+param_list
+	::= 
+	| param_list COMMA param						{::}
+	| param											{: System.out.println("PARAMETER");:}
+	;
+param
+	::= type_specifier IDENTIFIER								{::}
+	| type_specifier IDENTIFIER LEFTSQ RIGHTSQ	{::}
+	;
+	
+
+compound_stmt
+	::= LEFTCURLY local_declarations statement_list RIGHTCURLY		{::}
+	;
+	
+local_declarations 
+	::= local_declarations var_declaration		{::}
+	|											
+	;
+statement_list
+	::= statement_list statement		{::}
+	|
+	;
+
+statement
+	::= expression_stmt	{::}
+	| compound_stmt		{::}
+	| selection_stmt	{::}
+	| iteration_stmt	{::}
+	| return_stmt		{::}
+	;
+
+expression_stmt
+	::= expression END_OF_INSTRUCTION		{::}
+	| END_OF_INSTRUCTION		{::}
+	;
+simple_if
+	::= IF LEFT expression RIGHT statement
+	;
+	
+selection_stmt
+	::= simple_if					   	{::}
+	| selection_stmt ELSE statement 			{::}
+	;
+
+iteration_stmt
+	::= WHILE LEFT expression RIGHT statement		{::}
+	;
+return_stmt
+	::= RETURN END_OF_INSTRUCTION  {:	:}
+	| RETURN expression  END_OF_INSTRUCTION	{::}
+	;
+expression
+	::= var EQ expression  {::}
+	|  simple_expression	 {::}
+	;
+var		
+	::= IDENTIFIER				{::}
+	| IDENTIFIER LEFTSQ expression RIGHTSQ {::}
+	;
+simple_expression
+	::= additive_expression relop  additive_expression  {::}
+	| additive_expression {::}
+	;
+
+relop
+	::= LESSEQ	{::}
+	| LESS	{::}
+	| GREATEREQ	{::}
+	| GREATER	{::}		
+	| EQEQ {::}
+	| NOTEQ {::}
+	;
+additive_expression
+	::=additive_expression addop term  {::}
+	| term		{::}
+	;
+addop
+	::= PLUS	{::}
+	| MINUS {::}
+	;
+
+term 
+	::= term mulop factor {::}
+	| factor {::}
+	;
+mulop
+	::=	TIMES	{::}
+	|	DIVISION			{::}
+	;
+factor
+	::= LEFT expression RIGHT	{::}
+	| var	{::}
+	| call		{::}
+	| INTEGER_VALUE		{::}
+	;
+
+call
+	::= IDENTIFIER LEFT args RIGHT  {::}
+	;
+args
+	::=arg_list {::}
+	| 
+	;
+arg_list
+	::= arg_list COMMA expression		{::}
+	| expression		{::}
+	;
+
+
+/* The grammar rules */
+/* expr_list ::= expr_list expr:e SEMI         {: System.out.println(e); :}
             | expr:e SEMI                   {: System.out.println(e); :}
             ;
             
@@ -57,3 +225,5 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;        :}
              | expr:e1 TIMES expr:e2        {: RESULT = e1*e2;        :}
              | MINUS expr:e                 {: RESULT = -e;           :}
              ;
+*/
+
