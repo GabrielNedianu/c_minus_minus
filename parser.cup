@@ -129,8 +129,7 @@ exp
 atom
 	::= INTEGER_VALUE
 	| STRING
-	| TRUE
-	| FALSE
+	| BOOLEAN_VALUE	
 	| LEFT exp RIGHT
 	| fnCallExpr
 	| subscriptExpr
@@ -156,6 +155,7 @@ actualList
 subscriptExpr
 	::= IDENTIFIER LEFTSQ exp RIGHTSQ
 	;		
+
 
 
 /* The grammar rules */
