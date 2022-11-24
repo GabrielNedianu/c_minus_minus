@@ -1,7 +1,5 @@
 void main() {
-     int val = 10;
-     int sum;
-     sum = val + 5;
-     cout<<"This is a string";
-     cout<<val;
+     int valoare;
+     int val[10];
+     valoare = val + 5;
 }

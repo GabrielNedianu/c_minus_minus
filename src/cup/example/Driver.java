@@ -10,9 +10,9 @@ import java_cup.runtime.Symbol;
 class Driver {
 
 	public static void main(String[] args) throws Exception {
-		//	Parser parser = new Parser();
-		//	parser.parse();
 		ComplexSymbolFactory symbolFactory = new ComplexSymbolFactory();
+		Parser parser = new Parser();
+		parser.debug_parse();
 		File file = new File("input.txt");
 		FileInputStream fis = null;
 		try {

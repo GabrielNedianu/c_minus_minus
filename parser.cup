@@ -31,7 +31,7 @@ init with {:
 scan with {: return lexer.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal 			INTEGER,BOOL,VOID,TRUE,FALSE,IF,ELSE,WHILE,RETURN,CIN,COUT;
+terminal  			INTEGER,BOOL,VOID,TRUE,FALSE,IF,ELSE,WHILE,RETURN,CIN,COUT;
 terminal			QUATATIONMARK,EQ,PLUS,MINUS,TIMES,DIVISION,LEFTSHIFT,RIGHTSHIFT,LESS,GREATER,LESSEQ,GREATEREQ,EQEQ,NOTEQ;
 terminal			OR,AND,NOT,LEFTCURLY,RIGHTCURLY,LEFT,RIGHT,LEFTSQ,RIGHTSQ,COMMA,SEMI;
 terminal String 	IDENTIFIER;			  // identifer
@@ -62,7 +62,7 @@ varDecl
 	;
 	
 type
-	::= INTEGER	| BOOL | VOID;
+	::= INTEGER	| BOOL | VOID		{: System.out.println("type\n"); :};
 
 fnDecl
 	::= type IDENTIFIER parameters block
@@ -95,17 +95,17 @@ stmtList
 	;
 	
 stmt
-	::= CIN RIGHTSHIFT IDENTIFIER COMMA
-	| CIN RIGHTSHIFT IDENTIFIER LEFTSQ exp RIGHTSQ COMMA
-	| COUT LEFTSHIFT exp COMMA
-	| subscriptExpr EQ exp COMMA
-	| IDENTIFIER EQ exp COMMA
+	::= CIN RIGHTSHIFT IDENTIFIER SEMI
+	| CIN RIGHTSHIFT IDENTIFIER LEFTSQ exp RIGHTSQ SEMI
+	| COUT LEFTSHIFT exp SEMI
+	| subscriptExpr EQ exp SEMI
+	| IDENTIFIER EQ exp SEMI
 	| IF LEFT exp RIGHT block
 	| IF LEFT exp RIGHT block ELSE block
 	| WHILE LEFT exp RIGHT block
-	| RETURN exp COMMA
-	| RETURN COMMA
-	| fnCallStmt COMMA
+	| RETURN exp SEMI
+	| RETURN SEMI
+	| fnCallStmt SEMI
 	;	
 
 exp
