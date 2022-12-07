@@ -12,7 +12,7 @@ class Driver {
 	public static void main(String[] args) throws Exception {
 		ComplexSymbolFactory symbolFactory = new ComplexSymbolFactory();
 		Parser parser = new Parser();
-		parser.debug_parse();
+		parser.parse();
 		File file = new File("input.txt");
 		FileInputStream fis = null;
 		try {
@@ -25,7 +25,7 @@ class Driver {
 		Symbol currentSymbolNr;
 		while ((currentSymbolNr=lexer.next_token()).sym!= sym.EOF )
 		{
-			System.out.println(currentSymbolNr);
+			//System.out.println(currentSymbolNr);
 		}
 	}
 }
