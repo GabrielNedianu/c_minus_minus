@@ -51,109 +51,114 @@ precedence left TIMES, DIVISION;
 
 /* The grammar rules */
 program
-	::= program varDecl				{: System.out.println("program-> Declaration List \n"); :}
-	|	program fnDecl
-	|	/* empty */
+	::= program varDecl				{: System.out.println("program-> varDecl \n"); :}
+	|	program fnDecl				{: System.out.println("program-> fnDecl \n"); :}
+	|	/* empty */					{: System.out.println("program-> empty \n"); :}
 	;
 	
 varDecl
-	::= type IDENTIFIER SEMI
-	| type IDENTIFIER LEFTSQ INTEGER_VALUE RIGHTSQ SEMI
+	::= type IDENTIFIER SEMI									{: System.out.println("varDecl-> type IDENTIFIER; \n"); :}	
+	| type IDENTIFIER LEFTSQ INTEGER_VALUE RIGHTSQ SEMI			{: System.out.println("varDecl-> type with identifier and [value]; \n"); :}	
 	;
 	
 type
-	::= INTEGER	| BOOL | VOID		{: System.out.println("type\n"); :};
+	::= INTEGER		{: System.out.println("type -> INTEGER\n"); :}
+	| BOOL 			{: System.out.println("type -> BOOL\n"); :}
+	| VOID			{: System.out.println("type -> VOID\n"); :}
+	;
 
 fnDecl
-	::= type IDENTIFIER parameters block
+	::= type IDENTIFIER parameters block		{: System.out.println("fnDecl -> type IDENTIFIER parameters block \n"); :}
 	;
 	
 parameters
-	::= LEFT RIGHT
-	| LEFT formalsList RIGHT
+	::= LEFT RIGHT								{: System.out.println("parameters -> ( empty ) \n"); :}
+	| LEFT formalsList RIGHT					{: System.out.println("parameters -> ( formalsList ) \n"); :}
 	;
 	
 formalsList
-	::= formalDecl
-	| formalsList COMMA formalDecl
+	::= formalDecl								{: System.out.println("formalsList -> formalDecl \n"); :}
+	| formalsList COMMA formalDecl				{: System.out.println("formalsList -> formalsList, formalDecl \n"); :}
 	;
 	
 formalDecl
-	::= type IDENTIFIER;
+	::= type IDENTIFIER							{: System.out.println("formalDecl -> type IDENTIFIER \n"); :}
+	;
 	
 block
-	::= LEFTCURLY declList stmtList RIGHTCURLY	;
+	::= LEFTCURLY declList stmtList RIGHTCURLY		{: System.out.println("block -> { declList stmtList } \n"); :}	
+	;
 	
 declList
-	::= declList varDecl
-	| /* empty */
-;
+	::= declList varDecl							{: System.out.println("declList -> declList varDecl \n"); :}
+	| /* empty */									{: System.out.println("declList -> empty \n"); :}
+	;
 
 stmtList
-	::= stmtList stmt
-	| /* empty */
+	::= stmtList stmt								{: System.out.println("stmtList -> stmtList stmt \n"); :}	
+	| /* empty */									{: System.out.println("stmtList -> empty \n"); :}
 	;
 	
 stmt
-	::= CIN RIGHTSHIFT IDENTIFIER SEMI
-	| CIN RIGHTSHIFT IDENTIFIER LEFTSQ exp RIGHTSQ SEMI
-	| COUT LEFTSHIFT exp SEMI
-	| subscriptExpr EQ exp SEMI
-	| IDENTIFIER EQ exp SEMI
-	| IF LEFT exp RIGHT block
-	| IF LEFT exp RIGHT block ELSE block
-	| WHILE LEFT exp RIGHT block
-	| RETURN exp SEMI
-	| RETURN SEMI
-	| fnCallStmt SEMI
+	::= CIN RIGHTSHIFT IDENTIFIER SEMI						{: System.out.println("stmt -> CIN RIGHTSHIFT IDENTIFIER ; \n"); :}
+	| CIN RIGHTSHIFT IDENTIFIER LEFTSQ exp RIGHTSQ SEMI		{: System.out.println("stmt -> CIN RIGHTSHIFT IDENTIFIER [ exp ] ; \n"); :}
+	| COUT LEFTSHIFT exp SEMI								{: System.out.println("stmt -> COUT LEFTSHIFT exp ;\n"); :}
+	| subscriptExpr EQ exp SEMI								{: System.out.println("stmt -> subscriptExpr EQ exp ;\n"); :}
+	| IDENTIFIER EQ exp SEMI								{: System.out.println("stmt -> IDENTIFIER EQ exp ; \n"); :}
+	| IF LEFT exp RIGHT block								{: System.out.println("stmt -> IF ( exp ) block\n"); :}
+	| IF LEFT exp RIGHT block ELSE block					{: System.out.println("stmt -> IF ( exp ) block ELSE block \n"); :}
+	| WHILE LEFT exp RIGHT block							{: System.out.println("stmt -> WHILE ( exp ) block\n"); :}
+	| RETURN exp SEMI										{: System.out.println("stmt -> RETURN exp ; \n"); :}
+	| RETURN SEMI											{: System.out.println("stmt -> RETURN SEMI \n"); :}
+	| fnCallStmt SEMI										{: System.out.println("stmt -> fnCallStmt ; \n"); :}
 	;	
 
 exp
-	::= exp PLUS exp
-	| exp MINUS exp
-	| exp TIMES exp
-	| exp DIVISION exp
-	| NOT exp
-	| exp AND exp
-	| exp OR exp
-	| exp EQEQ exp
-	| exp NOTEQ exp
-	| exp LESS exp
-	| exp GREATER exp
-	| exp LESSEQ exp
-	| exp GREATEREQ exp
-	| MINUS atom
-	| atom
+	::= exp PLUS exp		{: System.out.println("exp -> exp PLUS exp \n"); :}
+	| exp MINUS exp			{: System.out.println("exp -> exp MINUS exp \n"); :}
+	| exp TIMES exp			{: System.out.println("exp -> exp TIMES exp \n"); :}
+	| exp DIVISION exp		{: System.out.println("exp -> exp DIVISION exp \n"); :}
+	| NOT exp				{: System.out.println("exp -> NOT exp \n"); :}
+	| exp AND exp			{: System.out.println("exp -> exp AND exp \n"); :}
+	| exp OR exp			{: System.out.println("exp -> exp OR exp \n"); :}
+	| exp EQEQ exp			{: System.out.println("exp -> exp EQEQ exp \n"); :}
+	| exp NOTEQ exp			{: System.out.println("exp -> exp NOTEQ exp \n"); :}
+	| exp LESS exp			{: System.out.println("exp -> exp LESS exp \n"); :}
+	| exp GREATER exp		{: System.out.println("exp -> exp GREATER exp \n"); :}
+	| exp LESSEQ exp		{: System.out.println("exp -> exp LESSEQ exp \n"); :}
+	| exp GREATEREQ exp		{: System.out.println("exp -> exp GREATEREQ exp \n"); :}
+	| MINUS atom			{: System.out.println("exp -> MINUS atom \n"); :}
+	| atom					{: System.out.println("exp -> atom \n"); :}
 	;
 	
 atom
-	::= INTEGER_VALUE
-	| STRING
-	| BOOLEAN_VALUE	
-	| LEFT exp RIGHT
-	| fnCallExpr
-	| subscriptExpr
-	| IDENTIFIER
+	::= INTEGER_VALUE	{: System.out.println("atom -> INTEGER_VALUE \n"); :}
+	| STRING			{: System.out.println("atom -> STRING \n"); :}
+	| BOOLEAN_VALUE		{: System.out.println("atom -> BOOLEAN_VALUE \n"); :}
+	| LEFT exp RIGHT	{: System.out.println("atom -> ( exp ) \n"); :}
+	| fnCallExpr		{: System.out.println("atom -> fnCallExpr \n"); :}
+	| subscriptExpr		{: System.out.println("atom -> subscriptExpr \n"); :}
+	| IDENTIFIER		{: System.out.println("atom -> IDENTIFIER \n"); :}
 	;
 	
 	
 fnCallExpr
-	::= IDENTIFIER RIGHT LEFT
-	| IDENTIFIER RIGHT actualList LEFT
+	::= IDENTIFIER RIGHT LEFT				{: System.out.println("fnCallExpr -> IDENTIFIER ( ) \n"); :}
+	| IDENTIFIER RIGHT actualList LEFT		{: System.out.println("fnCallExpr -> IDENTIFIER ( actualList ) \n"); :}
 	;
 
 fnCallStmt
-	::= IDENTIFIER RIGHT LEFT
-	| IDENTIFIER RIGHT actualList LEFT
+	::= IDENTIFIER RIGHT LEFT				{: System.out.println("fnCallStmt ->  IDENTIFIER ( ) \n"); :}
+	| IDENTIFIER RIGHT actualList LEFT		{: System.out.println("fnCallStmt ->  IDENTIFIER ( actualList ) \n"); :}
 	;
 	
 actualList
-	::= exp
-	| actualList COMMA exp
+	::= exp						{: System.out.println("actualList ->  exp \n"); :}
+	| actualList COMMA exp		{: System.out.println("actualList ->  actualList COMMA exp \n"); :}
 	;
 
 subscriptExpr
-	::= IDENTIFIER LEFTSQ exp RIGHTSQ
+	::= IDENTIFIER LEFTSQ exp RIGHTSQ		{: System.out.println("subscriptExpr ->  IDENTIFIER [ exp ] \n"); :}
 	;		
 
 
