@@ -42,8 +42,8 @@ terminal Boolean 	BOOLEAN_VALUE;		  // boolean values
 /* Non terminals */
 
 
-non terminal program, varDecl, fnDecl, type, parameters, block, formalsList, formalDecl, declList, stmtList, stmt, exp;
-non terminal subscriptExpr, fnCallStmt, atom, fnCallExpr, actualList;
+non terminal MultiTreeNode  program, varDecl, fnDecl, type, parameters, block, formalsList, formalDecl, declList, stmtList, stmt, exp;
+non terminal MultiTreeNode  subscriptExpr, fnCallStmt, atom, fnCallExpr, actualList;
 
 /* Precedences */
 precedence left PLUS, MINUS;
@@ -51,52 +51,52 @@ precedence left TIMES, DIVISION;
 
 /* The grammar rules */
 program
-	::= program varDecl				{: System.out.println("program-> varDecl \n"); :}
-	|	program fnDecl				{: System.out.println("program-> fnDecl \n"); :}
-	|	/* empty */					{: System.out.println("program-> empty \n"); :}
+	::= program:p varDecl:varD				{: RESULT = p; syntaxTree.addChildNode(varD); :}
+	|	program:p fnDecl:fnD				{: RESULT = p; syntaxTree.addChildNode(fnD); :}
+	|	/* empty */							{: RESULT = syntaxTree.create("Program"); :}
 	;
 	
 varDecl
-	::= type IDENTIFIER SEMI									{: System.out.println("varDecl-> type IDENTIFIER; \n"); :}	
-	| type IDENTIFIER LEFTSQ INTEGER_VALUE RIGHTSQ SEMI			{: System.out.println("varDecl-> type with identifier and [value]; \n"); :}	
+	::= type:t IDENTIFIER:id SEMI											{: RESULT = createVarDeclaration(t, id, 0); :}	
+	| type:t IDENTIFIER:id LEFTSQ INTEGER_VALUE:val RIGHTSQ SEMI			{: RESULT = createVarArrDeclaration(t, id, val); :}	
 	;
 	
 type
-	::= INTEGER		{: System.out.println("type -> INTEGER\n"); :}
-	| BOOL 			{: System.out.println("type -> BOOL\n"); :}
-	| VOID			{: System.out.println("type -> VOID\n"); :}
+	::= INTEGER		{: RESULT = createTypeSpecifier("INTEGER"); :}
+	| BOOL 			{: RESULT = createTypeSpecifier("BOOL"); :}
+	| VOID			{: RESULT = createTypeSpecifier("VOID"); :}
 	;
 
 fnDecl
-	::= type IDENTIFIER parameters block		{: System.out.println("fnDecl -> type IDENTIFIER parameters block \n"); :}
+	::= type:t IDENTIFIER:id parameters:para block:blck		{: RESULT = createFunctionDeclarationNode(t, id, para, blck); :}
 	;
 	
 parameters
-	::= LEFT RIGHT								{: System.out.println("parameters -> ( empty ) \n"); :}
-	| LEFT formalsList RIGHT					{: System.out.println("parameters -> ( formalsList ) \n"); :}
+	::= LEFT RIGHT									{: RESULT = createParameters(null); :}
+	| LEFT formalsList:frmL RIGHT					{: RESULT = createParameters(frmL); :}
 	;
 	
 formalsList
-	::= formalDecl								{: System.out.println("formalsList -> formalDecl \n"); :}
-	| formalsList COMMA formalDecl				{: System.out.println("formalsList -> formalsList, formalDecl \n"); :}
+	::= formalDecl:frmD								{: RESULT = createListNode("Formals List", frmD); :}
+	| formalsList:frmL COMMA formalDecl:frmD		{: RESULT = frml; RESULT.addChild(frmD); :}
 	;
 	
 formalDecl
-	::= type IDENTIFIER							{: System.out.println("formalDecl -> type IDENTIFIER \n"); :}
+	::= type:t IDENTIFIER:id							{: RESULT = createVarDeclaration(t, id, null); :}
 	;
 	
 block
-	::= LEFTCURLY declList stmtList RIGHTCURLY		{: System.out.println("block -> { declList stmtList } \n"); :}	
+	::= LEFTCURLY declList:dcL stmtList:stmtL RIGHTCURLY		{: RESULT = createBlock(dcL,stmtL); :}	
 	;
 	
 declList
-	::= declList varDecl							{: System.out.println("declList -> declList varDecl \n"); :}
-	| /* empty */									{: System.out.println("declList -> empty \n"); :}
+	::= declList:dcL varDecl:varD							{: RESULT = dcL; RESULT.addChild(varD); :}
+	| /* empty */									{: RESULT = createListNode("Declarations List", null); :}
 	;
 
 stmtList
-	::= stmtList stmt								{: System.out.println("stmtList -> stmtList stmt \n"); :}	
-	| /* empty */									{: System.out.println("stmtList -> empty \n"); :}
+	::= stmtList stmt								{: RESULT = StmL; RESULT.addChild(stmt); :}	
+	| /* empty */									{: RESULT = createListNode("Instructions List", null); :}
 	;
 	
 stmt
@@ -108,8 +108,8 @@ stmt
 	| IF LEFT exp RIGHT block								{: System.out.println("stmt -> IF ( exp ) block\n"); :}
 	| IF LEFT exp RIGHT block ELSE block					{: System.out.println("stmt -> IF ( exp ) block ELSE block \n"); :}
 	| WHILE LEFT exp RIGHT block							{: System.out.println("stmt -> WHILE ( exp ) block\n"); :}
-	| RETURN exp SEMI										{: System.out.println("stmt -> RETURN exp ; \n"); :}
-	| RETURN SEMI											{: System.out.println("stmt -> RETURN SEMI \n"); :}
+	| RETURN exp:e SEMI										{: RESULT = createStatement("Return", e); :}
+	| RETURN SEMI											{: RESULT = createStatement("Return"); :}
 	| fnCallStmt SEMI										{: System.out.println("stmt -> fnCallStmt ; \n"); :}
 	;	
 
@@ -160,18 +160,3 @@ actualList
 subscriptExpr
 	::= IDENTIFIER LEFTSQ exp RIGHTSQ		{: System.out.println("subscriptExpr ->  IDENTIFIER [ exp ] \n"); :}
 	;		
-
-
-
-/* The grammar rules */
-/* expr_list ::= expr_list expr:e SEMI         {: System.out.println(e); :}
-            | expr:e SEMI                   {: System.out.println(e); :}
-            ;
-            
-expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;        :}
-             | expr:e1 MINUS expr:e2        {: RESULT = e1-e2;        :}
-             | expr:e1 TIMES expr:e2        {: RESULT = e1*e2;        :}
-             | MINUS expr:e                 {: RESULT = -e;           :}
-             ;
-*/
-
