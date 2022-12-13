@@ -383,7 +383,35 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 //@@CUPDBG0
 
-  protected Lexer lexer;
+   	protected Lexer lexer;
+  	protected MultiTree syntaxTree = new MultiTree(); 
+	
+ 	 public MultiTree getSyntaxTree()
+  	{
+		return syntaxTree;
+  	}
+  	protected MultiTreeNode createDeclarationNode(MultiTreeNode declaration) { throw new UnsupportedOperationException();}
+ 	protected MultiTreeNode createFunctionDeclarationNode(MultiTreeNode typeSpecifier, String identifierName, MultiTreeNode paramsList, MultiTreeNode compoundStatement) { throw new UnsupportedOperationException(); }
+  	protected MultiTreeNode createTypeSpecifier(String typeName){ throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createListNode(String listName, MultiTreeNode firstChild){throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createVarDeclaration(MultiTreeNode typeSpecifier, String identifierName, Integer value ){throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createCompoundStatement(MultiTreeNode declarations, MultiTreeNode instructions){throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createIfStatement(String identifier, MultiTreeNode ifInstructions, MultiTreeNode elseInstructions){throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createIfStatement(MultiTreeNode condition, MultiTreeNode ifInstructions, MultiTreeNode elseInstructions){throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createStatement(String operation, String identifier, MultiTreeNode exp) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createExpression(MultiTreeNode exp1, String operation, MultiTreeNode exp2) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createAtomExpression(String operation, MultiTreeNode atom) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createAtomExpression(MultiTreeNode atom) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createAtom(MultiTreeNode exp) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createAtom(String value) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createSubscriptExpr(String identifier, MultiTreeNode expression) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createReturnStatement(MultiTreeNode exp) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createVarArrDeclaration(MultiTreeNode typeSpecifier, String identifierName, Integer value ){throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createBlock(MultiTreeNode declList, MultiTreeNode stmtList) {throw new UnsupportedOperationException();  }
+ 	protected MultiTreeNode createFunctionCallNode(String id, MultiTreeNode actualList) {throw new UnsupportedOperationException();  }
+ 	protected MultiTreeNode createParameters(MultiTreeNode params){throw new UnsupportedOperationException();  }
+ 	protected MultiTreeNode createAtom(Integer value) {throw new UnsupportedOperationException();  }
+	protected MultiTreeNode createAtom(Boolean value) {throw new UnsupportedOperationException();  }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -413,9 +441,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 0: // program ::= program varDecl 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location pxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location pxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode p = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		Location varDxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location varDxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode varD = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG3
- System.out.println("program-> varDecl \n"); 
+ RESULT = p; syntaxTree.addChildNode(varD); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -426,7 +460,7 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		Location start_valxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
 		Location start_valxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
-		Object start_val = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		MultiTreeNode start_val = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		RESULT = start_val;
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -437,9 +471,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 2: // program ::= program fnDecl 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location pxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location pxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode p = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		Location fnDxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location fnDxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode fnD = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG4
- System.out.println("program-> fnDecl \n"); 
+ RESULT = p; syntaxTree.addChildNode(fnD); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -447,9 +487,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 3: // program ::= 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG5
- System.out.println("program-> empty \n"); 
+ RESULT = syntaxTree.create("Program"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -457,9 +497,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 4: // varDecl ::= type IDENTIFIER SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location txleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location txright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode t = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG6
- System.out.println("varDecl-> type IDENTIFIER; \n"); 
+ RESULT = createVarDeclaration(t, id, 0); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("varDecl",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -467,9 +513,18 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 5: // varDecl ::= type IDENTIFIER LEFTSQ INTEGER_VALUE RIGHTSQ SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location txleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).xleft;
+		Location txright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).xright;
+		MultiTreeNode t = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
+		Location valxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location valxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		Integer val = (Integer)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		//@@CUPDBG7
- System.out.println("varDecl-> type with identifier and [value]; \n"); 
+ RESULT = createVarArrDeclaration(t, id, val); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("varDecl",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -477,9 +532,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 6: // type ::= INTEGER 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG8
- System.out.println("type -> INTEGER\n"); 
+ RESULT = createTypeSpecifier("INTEGER"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("type",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -487,9 +542,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 7: // type ::= BOOL 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG9
- System.out.println("type -> BOOL\n"); 
+ RESULT = createTypeSpecifier("BOOL"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("type",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -497,9 +552,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 8: // type ::= VOID 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG10
- System.out.println("type -> VOID\n"); 
+ RESULT = createTypeSpecifier("VOID"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("type",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -507,9 +562,21 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 9: // fnDecl ::= type IDENTIFIER parameters block 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location txleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
+		Location txright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
+		MultiTreeNode t = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location paraxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location paraxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode para = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		Location blckxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location blckxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode blck = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG11
- System.out.println("fnDecl -> type IDENTIFIER parameters block \n"); 
+ RESULT = createFunctionDeclarationNode(t, id, para, blck); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("fnDecl",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -517,9 +584,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // parameters ::= LEFT RIGHT 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG12
- System.out.println("parameters -> ( empty ) \n"); 
+ RESULT = createParameters(null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("parameters",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -527,9 +594,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // parameters ::= LEFT formalsList RIGHT 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location frmLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location frmLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode frmL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG13
- System.out.println("parameters -> ( formalsList ) \n"); 
+ RESULT = createParameters(frmL); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("parameters",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -537,9 +607,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // formalsList ::= formalDecl 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location frmDxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location frmDxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode frmD = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG14
- System.out.println("formalsList -> formalDecl \n"); 
+ RESULT = createListNode("Formals List", frmD); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("formalsList",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -547,9 +620,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 13: // formalsList ::= formalsList COMMA formalDecl 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location frmLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location frmLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode frmL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location frmDxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location frmDxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode frmD = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG15
- System.out.println("formalsList -> formalsList, formalDecl \n"); 
+ RESULT = frmL; RESULT.addChild(frmD); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("formalsList",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -557,9 +636,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // formalDecl ::= type IDENTIFIER 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location txleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location txright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode t = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG16
- System.out.println("formalDecl -> type IDENTIFIER \n"); 
+ RESULT = createVarDeclaration(t, id, null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("formalDecl",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -567,9 +652,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // block ::= LEFTCURLY declList stmtList RIGHTCURLY 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location dcLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location dcLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode dcL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location stmtLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location stmtLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode stmtL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG17
- System.out.println("block -> { declList stmtList } \n"); 
+ RESULT = createBlock(dcL,stmtL); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("block",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -577,9 +668,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 16: // declList ::= declList varDecl 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location dcLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location dcLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode dcL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		Location varDxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location varDxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode varD = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG18
- System.out.println("declList -> declList varDecl \n"); 
+ RESULT = dcL; RESULT.addChild(varD); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declList",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -587,9 +684,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 17: // declList ::= 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG19
- System.out.println("declList -> empty \n"); 
+ RESULT = createListNode("Declarations List", null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declList",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -597,9 +694,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 18: // stmtList ::= stmtList stmt 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location StmLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location StmLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode StmL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		Location stmxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location stmxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode stm = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG20
- System.out.println("stmtList -> stmtList stmt \n"); 
+ RESULT = StmL; RESULT.addChild(stm); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmtList",9, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -607,9 +710,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // stmtList ::= 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG21
- System.out.println("stmtList -> empty \n"); 
+ RESULT = createListNode("Instructions List", null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmtList",9, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -617,9 +720,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // stmt ::= CIN RIGHTSHIFT IDENTIFIER SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG22
- System.out.println("stmt -> CIN RIGHTSHIFT IDENTIFIER ; \n"); 
+ RESULT = createStatement("CIN", id, null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -627,9 +733,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // stmt ::= CIN RIGHTSHIFT IDENTIFIER LEFTSQ exp RIGHTSQ SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		//@@CUPDBG23
- System.out.println("stmt -> CIN RIGHTSHIFT IDENTIFIER [ exp ] ; \n"); 
+ RESULT = createStatement("CIN", id, e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -637,9 +749,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 22: // stmt ::= COUT LEFTSHIFT exp SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG24
- System.out.println("stmt -> COUT LEFTSHIFT exp ;\n"); 
+ RESULT = createStatement("COUT", null, e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -647,9 +762,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 23: // stmt ::= subscriptExpr EQ exp SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG25
- System.out.println("stmt -> subscriptExpr EQ exp ;\n"); 
+ RESULT = createStatement("Subscript Expr", null, e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -657,9 +775,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 24: // stmt ::= IDENTIFIER EQ exp SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG26
- System.out.println("stmt -> IDENTIFIER EQ exp ; \n"); 
+ RESULT = createStatement("EQ", id, e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -667,9 +791,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 25: // stmt ::= IF LEFT exp RIGHT block 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location blckxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location blckxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode blck = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG27
- System.out.println("stmt -> IF ( exp ) block\n"); 
+ RESULT = createIfStatement(e, blck, null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -677,9 +807,18 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 26: // stmt ::= IF LEFT exp RIGHT block ELSE block 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
+		Location blck1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location blck1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode blck1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location blck2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location blck2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode blck2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG28
- System.out.println("stmt -> IF ( exp ) block ELSE block \n"); 
+ RESULT = createIfStatement(e, blck1, blck2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -687,9 +826,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 27: // stmt ::= WHILE LEFT exp RIGHT block 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location blckxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location blckxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode blck = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG29
- System.out.println("stmt -> WHILE ( exp ) block\n"); 
+ RESULT = createStatement("While", null, blck); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -697,9 +842,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 28: // stmt ::= RETURN exp SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG30
- System.out.println("stmt -> RETURN exp ; \n"); 
+ RESULT = createReturnStatement(e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -707,9 +855,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 29: // stmt ::= RETURN SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
 		//@@CUPDBG31
- System.out.println("stmt -> RETURN SEMI \n"); 
+ RESULT = createReturnStatement(null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -717,9 +865,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 30: // stmt ::= fnCallStmt SEMI 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location fnxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location fnxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode fn = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG32
- System.out.println("stmt -> fnCallStmt ; \n"); 
+ RESULT = createStatement("FnCall", null, fn); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("stmt",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -727,9 +878,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 31: // exp ::= exp PLUS exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG33
- System.out.println("exp -> exp PLUS exp \n"); 
+ RESULT = createExpression(exp1, "Plus", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -737,9 +894,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 32: // exp ::= exp MINUS exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG34
- System.out.println("exp -> exp MINUS exp \n"); 
+ RESULT = createExpression(exp1, "Minus", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -747,9 +910,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 33: // exp ::= exp TIMES exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG35
- System.out.println("exp -> exp TIMES exp \n"); 
+ RESULT = createExpression(exp1, "Times", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -757,9 +926,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 34: // exp ::= exp DIVISION exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG36
- System.out.println("exp -> exp DIVISION exp \n"); 
+ RESULT = createExpression(exp1, "Division", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -767,9 +942,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 35: // exp ::= NOT exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG37
- System.out.println("exp -> NOT exp \n"); 
+ RESULT = createExpression(null, "Not", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -777,9 +955,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 36: // exp ::= exp AND exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG38
- System.out.println("exp -> exp AND exp \n"); 
+ RESULT = createExpression(exp1, "And", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -787,9 +971,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 37: // exp ::= exp OR exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG39
- System.out.println("exp -> exp OR exp \n"); 
+ RESULT = createExpression(exp1, "Or", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -797,9 +987,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 38: // exp ::= exp EQEQ exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG40
- System.out.println("exp -> exp EQEQ exp \n"); 
+ RESULT = createExpression(exp1, "Equal Equal", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -807,9 +1003,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 39: // exp ::= exp NOTEQ exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG41
- System.out.println("exp -> exp NOTEQ exp \n"); 
+ RESULT = createExpression(exp1, "Not Equal", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -817,9 +1019,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 40: // exp ::= exp LESS exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG42
- System.out.println("exp -> exp LESS exp \n"); 
+ RESULT = createExpression(exp1, "Less", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -827,9 +1035,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 41: // exp ::= exp GREATER exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG43
- System.out.println("exp -> exp GREATER exp \n"); 
+ RESULT = createExpression(exp1, "Greater", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -837,9 +1051,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 42: // exp ::= exp LESSEQ exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG44
- System.out.println("exp -> exp LESSEQ exp \n"); 
+ RESULT = createExpression(exp1, "Less or Equal", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -847,9 +1067,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 43: // exp ::= exp GREATEREQ exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exp1xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location exp1xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode exp1 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exp2xleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exp2xright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode exp2 = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG45
- System.out.println("exp -> exp GREATEREQ exp \n"); 
+ RESULT = createExpression(exp1, "Greater or Equal", exp2); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -857,9 +1083,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 44: // exp ::= MINUS atom 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location atxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location atxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode at = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG46
- System.out.println("exp -> MINUS atom \n"); 
+ RESULT = createAtomExpression("Minus", at); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -867,9 +1096,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 45: // exp ::= atom 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location atxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location atxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode at = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG47
- System.out.println("exp -> atom \n"); 
+ RESULT = createAtomExpression(at); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("exp",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -877,9 +1109,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 46: // atom ::= INTEGER_VALUE 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location intgrxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location intgrxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		Integer intgr = (Integer)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG48
- System.out.println("atom -> INTEGER_VALUE \n"); 
+ RESULT = createAtom(intgr); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("atom",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -887,9 +1122,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 47: // atom ::= STRING 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location strxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location strxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		String str = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG49
- System.out.println("atom -> STRING \n"); 
+ RESULT = createAtom(str); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("atom",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -897,9 +1135,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 48: // atom ::= BOOLEAN_VALUE 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location boolxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location boolxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		Boolean bool = (Boolean)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG50
- System.out.println("atom -> BOOLEAN_VALUE \n"); 
+ RESULT = createAtom(bool); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("atom",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -907,9 +1148,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 49: // atom ::= LEFT exp RIGHT 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG51
- System.out.println("atom -> ( exp ) \n"); 
+ RESULT = createAtom(e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("atom",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -917,9 +1161,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 50: // atom ::= fnCallExpr 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location fnCallxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location fnCallxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode fnCall = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG52
- System.out.println("atom -> fnCallExpr \n"); 
+ RESULT = createAtom(fnCall); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("atom",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -927,9 +1174,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 51: // atom ::= subscriptExpr 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location subscxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location subscxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode subsc = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG53
- System.out.println("atom -> subscriptExpr \n"); 
+ RESULT = createAtom(subsc); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("atom",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -937,9 +1187,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 52: // atom ::= IDENTIFIER 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG54
- System.out.println("atom -> IDENTIFIER \n"); 
+ RESULT = createAtom(id); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("atom",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -947,9 +1200,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 53: // fnCallExpr ::= IDENTIFIER RIGHT LEFT 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		//@@CUPDBG55
- System.out.println("fnCallExpr -> IDENTIFIER ( ) \n"); 
+ RESULT = createFunctionCallNode(id, null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("fnCallExpr",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -957,9 +1213,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 54: // fnCallExpr ::= IDENTIFIER RIGHT actualList LEFT 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		Location aLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location aLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode aL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG56
- System.out.println("fnCallExpr -> IDENTIFIER ( actualList ) \n"); 
+ RESULT = createFunctionCallNode(id, aL); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("fnCallExpr",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -967,9 +1229,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 55: // fnCallStmt ::= IDENTIFIER RIGHT LEFT 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		//@@CUPDBG57
- System.out.println("fnCallStmt ->  IDENTIFIER ( ) \n"); 
+ RESULT = createFunctionCallNode(id, null); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("fnCallStmt",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -977,9 +1242,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 56: // fnCallStmt ::= IDENTIFIER RIGHT actualList LEFT 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		Location aLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location aLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode aL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG58
- System.out.println("fnCallStmt ->  IDENTIFIER ( actualList ) \n"); 
+ RESULT = createFunctionCallNode(id, aL); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("fnCallStmt",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -987,9 +1258,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 57: // actualList ::= exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG59
- System.out.println("actualList ->  exp \n"); 
+ RESULT = createListNode("Actual exp List", e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("actualList",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -997,9 +1271,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 58: // actualList ::= actualList COMMA exp 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location actLxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
+		Location actLxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
+		MultiTreeNode actL = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG60
- System.out.println("actualList ->  actualList COMMA exp \n"); 
+ RESULT = actL; actL.addChild(e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("actualList",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1007,9 +1287,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 59: // subscriptExpr ::= IDENTIFIER LEFTSQ exp RIGHTSQ 
             {
-              Object RESULT =null;
+              MultiTreeNode RESULT =null;
+		Location idxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
+		Location idxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		Location exleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
+		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
+		MultiTreeNode e = (MultiTreeNode)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG61
- System.out.println("subscriptExpr ->  IDENTIFIER [ exp ] \n"); 
+ RESULT = createSubscriptExpr(id, e); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("subscriptExpr",12, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
