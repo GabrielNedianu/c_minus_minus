@@ -46,8 +46,15 @@ public class ParserWithTree extends Parser{
 	}
 	protected MultiTreeNode createBlock(MultiTreeNode declList, MultiTreeNode stmtList) {
 		MultiTreeNode blockNode = new MultiTreeNode("Block");
-		blockNode.addChild(declList);
-		blockNode.addChild(stmtList);
+		if(declList.getChildren().length > 0) {
+			blockNode.addChild(declList);
+		}
+		if(stmtList.getChildren().length > 0) {
+			blockNode.addChild(stmtList);
+		}
+		if (declList.getChildren().length > 0 && stmtList.getChildren().length > 0) {
+			blockNode.addChild("\tempty");
+		}
 		return blockNode;
 	}
 	protected MultiTreeNode createVarDeclaration(MultiTreeNode typeSpecifier, String identifierName, Integer value )
@@ -84,7 +91,7 @@ public class ParserWithTree extends Parser{
 	}
 	protected MultiTreeNode createIfStatement(String identifier, MultiTreeNode ifInstructions, MultiTreeNode elseInstructions)
 	{
-		MultiTreeNode newNode = new MultiTreeNode("IfStatement", identifier);
+		MultiTreeNode newNode = new MultiTreeNode("If Statement", identifier);
 		newNode.addChild(ifInstructions);
 		if (elseInstructions != null)
 			newNode.addChild(elseInstructions);
@@ -128,8 +135,10 @@ public class ParserWithTree extends Parser{
 	}
 	protected MultiTreeNode createStatement(String operation, String identifier, MultiTreeNode exp) {
 		MultiTreeNode expr = new MultiTreeNode(operation);
-		MultiTreeNode id = new MultiTreeNode(identifier);
-		expr.addChild(id);
+		if(identifier != null) {
+			MultiTreeNode id = new MultiTreeNode(identifier);
+			expr.addChild(id);
+		}
 		if(exp != null) {
 			expr.addChild(exp);
 		}

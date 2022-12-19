@@ -4,5 +4,7 @@ void main() {
      valoare = val + 5;
      valoare = val -15;
      if(valoare != 10) 
-     { int ceva; }
+     {
+
+     }
 }
