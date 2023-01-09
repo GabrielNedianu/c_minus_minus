@@ -1,6 +1,14 @@
+bool varGlob;
+
+void function(){
+	int variabilaInFunctie;
+}
+
+int variabilaGlobala;
+
 void main() {
      int valoare;
-     int val[10];
+     bool booleanaInMain;
      valoare = val + 5;
      valoare = val -15;
      if(valoare != 10) 

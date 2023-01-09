@@ -1,6 +1,11 @@
 package cup.example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import cup.example.enums.IdentifierScope;
+import cup.example.enums.SymTableEntry;
+import cup.example.enums.SymbolType;
 
 public class MultiTreeNode {
 	
@@ -12,7 +17,11 @@ public class MultiTreeNode {
 	public String getData() {
 		return data;
 	}
-
+	
+	public String geteExtraData() {
+		return extraData;
+	}
+	
 	public void setData(String data) {
 		this.data = data;	
 		
@@ -70,5 +79,45 @@ public class MultiTreeNode {
 			multiTreeNode.printNode(level + 1);
 		}
 	}
-
+	
+	public void parseNode(int level, HashMap<String, SymTableEntry> tableMap) {
+		
+		if (level == 1) {
+			if ("Var Declaration".equalsIgnoreCase(data)) {
+				tableMap.put(extraData, new SymTableEntry(extraData, 
+												SymbolType.VARIABLE, 
+												children.get(0).geteExtraData(), 
+												IdentifierScope.GLOBAL,
+												"global"));
+			}
+			if ("FunctionDeclaration".equalsIgnoreCase(data)) {
+				tableMap.put(extraData, new SymTableEntry(extraData, 
+						SymbolType.FUNCTION, 
+						children.get(0).geteExtraData(), 
+						IdentifierScope.GLOBAL,
+						"global"));
+				parseNode(level + 1, tableMap, extraData);
+			} 
+		}
+		
+		// Continue parsing
+		for (MultiTreeNode multiTreeNode : children) {
+			multiTreeNode.parseNode(level +1, tableMap);
+		}
+		
+	}
+	
+	public void parseNode(int level, HashMap<String, SymTableEntry> tableMap, String contextName) {
+		if ("Var Declaration".equalsIgnoreCase(data)) {
+			tableMap.put(extraData, new SymTableEntry(extraData, 
+											SymbolType.VARIABLE, 
+											children.get(0).geteExtraData(), 
+											IdentifierScope.LOCAL,
+											contextName));
+		}
+		for (MultiTreeNode multiTreeNode : children) {
+			multiTreeNode.parseNode(level +1, tableMap, contextName);
+		}
+	}
+	
 }

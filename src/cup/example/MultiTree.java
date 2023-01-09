@@ -1,5 +1,9 @@
 package cup.example;
 
+import java.util.HashMap;
+
+import cup.example.enums.SymTableEntry;
+
 public class MultiTree {
 	
 	private MultiTreeNode root = null;
@@ -52,6 +56,10 @@ public class MultiTree {
 		root.printNode(0);
 		System.out.println("Total elements: " + nodesCount);
 				
+	}
+	
+	public void parseTree(HashMap<String, SymTableEntry> map) {
+		root.parseNode(0, map);
 	}
 
 	public int getNodesCount() {

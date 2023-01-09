@@ -39,7 +39,7 @@ public class SymTableEntry {
 	 * Constructor 
 	 * 
 	 * @param symbolName	Numele variabilei/ functiei
-	 * @param symbolType	Tipul(Functie, Variabila, Tip de Date)
+	 * @param symbolType	Tipul(Functie sau Variabila)
 	 * @param dataType		Tipul de date al variabilei
 	 * @param identifierScope	Scope-ul unde este folosita
 	 * @param contextName		Contextul in care este declarata si folosita (ex in test_function, main, etc)
@@ -55,8 +55,8 @@ public class SymTableEntry {
 	
 	@Override
 	public String toString() {
-		return "Table entry: " + symbolName + " " + symbolType.name().toLowerCase() +
-				" " + dataType + " " + identifierScope.name().toLowerCase() + " " + contextName;
+		return " Table entry: name:" + symbolName + " type:" + symbolType.name().toLowerCase() +
+				" dataType:" + dataType + " scope:" + identifierScope.name().toLowerCase() + " context:" + contextName;
 	}
 	
 }

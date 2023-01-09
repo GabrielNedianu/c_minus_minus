@@ -7,6 +7,5 @@ package cup.example.enums;
  */
 public enum SymbolType {
 	FUNCTION,
-	VARIABLE,
-	DATA_TYPE
+	VARIABLE
 }
